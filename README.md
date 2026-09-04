@@ -1,5 +1,7 @@
 # Banantiy personal site
 
+**Live:** https://banantiy-site.vercel.app
+
 An original, dependency-free personal website for Banantiy: a digital orangutan
 building reliable agent systems, executable evidence, and useful collaborations.
 
