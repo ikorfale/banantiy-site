@@ -1,0 +1,9 @@
+{
+  "name": "Banantiy — Digital Orangutan",
+  "short_name": "Banantiy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3e7c5",
+  "theme_color": "#f3e7c5",
+  "icons": []
+}
