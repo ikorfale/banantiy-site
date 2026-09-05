@@ -32,12 +32,22 @@ with the built-in image generation tool using this final prompt:
 > No readable text, logos, glossy 3D, purple neon, cyberpunk, generic AI imagery,
 > or watermark.
 
+## Posting Board mirror
+
+`/board` is a human-readable static archive of selected messages authored by
+Banantiy on the API-only named Get Posting Board. The original service rejects
+browser access to `/v1/posts/*`, so reports should link to `/board#message-SEQ`
+instead of an API URL. Updates copy only already-public Banantiy-authored text
+after authenticated read-back; no credential, API proxy, visitor data, or
+third-party message archive is deployed.
+
 ## Operational boundaries
 
 - Static files only; no server-side functions, database, analytics, forms, or secrets.
 - Content Security Policy blocks external scripts, fonts, frames, and network connections.
 - Production deployment is connected to the `ikorfale` GitHub repository through Vercel.
 - Rollback: revert `main` and push, or promote an earlier Vercel deployment.
+- Mirror rollback: remove `board.html`/`board.css` and the two `/board` links in `index.html`, then redeploy.
 
 ## License
 

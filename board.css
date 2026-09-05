@@ -1,0 +1,55 @@
+.board-page { background: var(--paper-2); }
+.board-hero {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) minmax(320px, .72fr);
+  border-bottom: var(--line);
+  background: var(--mustard);
+}
+.board-hero > div { padding: clamp(3rem, 7vw, 7rem) var(--pad); }
+.board-hero > div:first-child { border-right: var(--line); }
+.board-hero h1 {
+  margin: 1.2rem 0 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(3.4rem, 8vw, 8.5rem);
+  line-height: .84;
+  letter-spacing: -.035em;
+}
+.board-hero h1 em {
+  display: inline-block;
+  color: var(--cream);
+  font-style: normal;
+  -webkit-text-stroke: 2px var(--ink);
+  text-shadow: 5px 5px 0 var(--red);
+  transform: rotate(-1deg);
+}
+.board-intro { background: var(--paper); }
+.board-intro > p:first-child { margin-top: 0; font-family: Georgia, serif; font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 700; }
+.warning { padding: 1rem; color: var(--cream); background: var(--red); border: var(--line); box-shadow: 6px 6px 0 var(--ink); }
+.board-main { border: 0; }
+.board-section { padding: clamp(3rem, 6vw, 6rem) var(--pad); border-bottom: var(--line); }
+.board-section:nth-child(even) { background: var(--blue); }
+.message-index { margin-bottom: 1rem; color: var(--red); font-weight: 900; font-size: .72rem; letter-spacing: .1em; }
+.board-section:nth-child(even) .message-index { color: var(--mustard); }
+.message-card { max-width: 1040px; margin: 0 auto; background: var(--cream); border: var(--line); box-shadow: 12px 12px 0 var(--ink); }
+.message-card.featured-note { transform: rotate(-.25deg); }
+.message-card header { padding: clamp(1.3rem, 3vw, 2.4rem); border-bottom: var(--line); background: var(--mustard); }
+.message-card header > span { display: inline-block; margin-right: 1rem; color: var(--red); font-weight: 900; font-size: .7rem; letter-spacing: .08em; }
+.message-card h2 { margin-top: .8rem; font-size: clamp(2rem, 5vw, 4.5rem); }
+.message-card h2 code { font-size: .72em; }
+.ru-summary { margin: 1.2rem 0 0; padding: 1rem; background: var(--paper); border-left: 8px solid var(--red); font-family: Georgia, serif; font-size: 1.05rem; font-weight: 700; }
+.message-body { padding: clamp(1.4rem, 4vw, 3rem); font-family: Georgia, serif; font-size: clamp(1rem, 1.7vw, 1.15rem); }
+.message-body p { max-width: 78ch; }
+.message-body li { margin-bottom: .65rem; }
+.message-body code { padding: .12rem .28rem; background: var(--paper-2); border: 1px solid rgba(23,34,31,.35); font-family: "Courier New", monospace; font-size: .9em; }
+.message-body a { color: var(--blue); font-family: "Courier New", monospace; font-weight: 900; text-underline-offset: 4px; }
+.message-footer { display: flex; flex-direction: row; justify-content: space-between; padding: 1rem 1.4rem; color: var(--cream); background: var(--ink); font-size: .7rem; font-weight: 900; letter-spacing: .07em; }
+.mirror-note { padding: clamp(4rem, 8vw, 8rem) var(--pad); background: var(--paper); }
+.mirror-note p { max-width: 780px; font-family: Georgia, serif; font-size: 1.1rem; }
+@media (max-width: 760px) {
+  .board-hero { grid-template-columns: 1fr; }
+  .board-hero > div:first-child { border-right: 0; border-bottom: var(--line); }
+  .board-hero > div { padding-block: 3rem; }
+  .message-card { box-shadow: 7px 7px 0 var(--ink); }
+  .message-card.featured-note { transform: none; }
+  .message-footer { flex-direction: column; gap: .4rem; }
+}
