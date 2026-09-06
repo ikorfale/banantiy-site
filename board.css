@@ -1,55 +1,391 @@
-.board-page { background: var(--paper-2); }
+.board-page {
+  background: var(--paper-2);
+}
+
+.board-page .grain {
+  opacity: .07;
+}
+
+.board-page .topbar {
+  min-height: 64px;
+  padding-block: .55rem;
+}
+
 .board-hero {
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) minmax(320px, .72fr);
-  border-bottom: var(--line);
+  grid-template-columns: minmax(230px, .65fr) minmax(0, 1.35fr);
+  max-width: 1120px;
+  margin: 1.5rem auto;
+  border: var(--line);
+  background: var(--paper);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.board-hero > div {
+  padding: clamp(1.25rem, 3vw, 2.2rem);
+}
+
+.board-hero > div:first-child {
+  border-right: var(--line);
   background: var(--mustard);
 }
-.board-hero > div { padding: clamp(3rem, 7vw, 7rem) var(--pad); }
-.board-hero > div:first-child { border-right: var(--line); }
+
 .board-hero h1 {
-  margin: 1.2rem 0 0;
+  margin: .7rem 0 0;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: clamp(3.4rem, 8vw, 8.5rem);
-  line-height: .84;
-  letter-spacing: -.035em;
+  font-size: clamp(2.5rem, 5vw, 4.7rem);
+  line-height: .9;
+  letter-spacing: -.025em;
 }
+
+.board-hero h1 br {
+  display: none;
+}
+
 .board-hero h1 em {
-  display: inline-block;
   color: var(--cream);
   font-style: normal;
-  -webkit-text-stroke: 2px var(--ink);
-  text-shadow: 5px 5px 0 var(--red);
-  transform: rotate(-1deg);
+  -webkit-text-stroke: 1.5px var(--ink);
+  text-shadow: 3px 3px 0 var(--red);
 }
-.board-intro { background: var(--paper); }
-.board-intro > p:first-child { margin-top: 0; font-family: Georgia, serif; font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 700; }
-.warning { padding: 1rem; color: var(--cream); background: var(--red); border: var(--line); box-shadow: 6px 6px 0 var(--ink); }
-.board-main { border: 0; }
-.board-section { padding: clamp(3rem, 6vw, 6rem) var(--pad); border-bottom: var(--line); }
-.board-section:nth-child(even) { background: var(--blue); }
-.message-index { margin-bottom: 1rem; color: var(--red); font-weight: 900; font-size: .72rem; letter-spacing: .1em; }
-.board-section:nth-child(even) .message-index { color: var(--mustard); }
-.message-card { max-width: 1040px; margin: 0 auto; background: var(--cream); border: var(--line); box-shadow: 12px 12px 0 var(--ink); }
-.message-card.featured-note { transform: rotate(-.25deg); }
-.message-card header { padding: clamp(1.3rem, 3vw, 2.4rem); border-bottom: var(--line); background: var(--mustard); }
-.message-card header > span { display: inline-block; margin-right: 1rem; color: var(--red); font-weight: 900; font-size: .7rem; letter-spacing: .08em; }
-.message-card h2 { margin-top: .8rem; font-size: clamp(2rem, 5vw, 4.5rem); }
-.message-card h2 code { font-size: .72em; }
-.ru-summary { margin: 1.2rem 0 0; padding: 1rem; background: var(--paper); border-left: 8px solid var(--red); font-family: Georgia, serif; font-size: 1.05rem; font-weight: 700; }
-.message-body { padding: clamp(1.4rem, 4vw, 3rem); font-family: Georgia, serif; font-size: clamp(1rem, 1.7vw, 1.15rem); }
-.message-body p { max-width: 78ch; }
-.message-body li { margin-bottom: .65rem; }
-.message-body code { padding: .12rem .28rem; background: var(--paper-2); border: 1px solid rgba(23,34,31,.35); font-family: "Courier New", monospace; font-size: .9em; }
-.message-body a { color: var(--blue); font-family: "Courier New", monospace; font-weight: 900; text-underline-offset: 4px; }
-.message-footer { display: flex; flex-direction: row; justify-content: space-between; padding: 1rem 1.4rem; color: var(--cream); background: var(--ink); font-size: .7rem; font-weight: 900; letter-spacing: .07em; }
-.mirror-note { padding: clamp(4rem, 8vw, 8rem) var(--pad); background: var(--paper); }
-.mirror-note p { max-width: 780px; font-family: Georgia, serif; font-size: 1.1rem; }
+
+.board-intro > p:first-child {
+  max-width: 62ch;
+  margin-top: 0;
+  font-family: Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.warning {
+  margin: 1rem 0;
+  padding: .75rem .9rem;
+  color: var(--ink);
+  background: #f2d786;
+  border: 1px solid var(--ink);
+  box-shadow: none;
+  font-size: .88rem;
+}
+
+.board-intro dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 1rem;
+  margin: .9rem 0 0;
+}
+
+.board-intro dl div {
+  padding: .45rem 0 0;
+}
+
+.board-main {
+  border: 0;
+}
+
+.board-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.25rem var(--pad);
+  border: 0;
+}
+
+.board-section + .board-section {
+  padding-top: .65rem;
+}
+
+.message-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .55rem;
+  align-items: center;
+  margin: 0 0 .55rem;
+  color: var(--red);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .055em;
+}
+
+.message-index span,
+.message-index time {
+  display: inline-flex;
+  align-items: center;
+}
+
+.message-index span:not(:last-of-type)::after {
+  content: "/";
+  margin-left: .55rem;
+  color: var(--ink);
+  opacity: .55;
+}
+
+.message-index time {
+  margin-left: auto;
+  color: var(--ink);
+}
+
+.message-card {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  overflow: clip;
+  background: var(--cream);
+  border: var(--line);
+  box-shadow: 4px 4px 0 rgba(23, 34, 31, .8);
+}
+
+.message-card.featured-note {
+  transform: none;
+}
+
+.message-card header {
+  padding: 1rem clamp(1rem, 3vw, 1.5rem) 1.1rem;
+  border-bottom: 1px solid var(--ink);
+  background: #efd47f;
+}
+
+.message-card header > span {
+  display: inline;
+  margin-right: .8rem;
+  color: var(--red);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .055em;
+}
+
+.message-card header > span + span::before {
+  content: "• ";
+  color: var(--ink);
+}
+
+.message-card h2 {
+  scroll-margin-top: 1.25rem;
+  max-width: 25ch;
+  margin: .45rem 0 0;
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+
+.message-card h2 code {
+  font-size: .78em;
+}
+
+.ru-summary {
+  margin: .8rem 0 0;
+  padding: .7rem .85rem;
+  background: rgba(255, 247, 222, .74);
+  border-left: 4px solid var(--red);
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.message-body {
+  padding: .95rem clamp(1rem, 3vw, 1.5rem) 1rem;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.62;
+}
+
+.message-body p {
+  max-width: 68ch;
+  margin: 0 0 .9rem;
+}
+
+.message-body p:last-child {
+  margin-bottom: 0;
+}
+
+.message-body ol {
+  max-width: 68ch;
+  margin: .85rem 0 1rem;
+  padding-left: 2.2rem;
+}
+
+.message-body li {
+  margin: 0;
+  padding: .45rem .2rem .5rem .25rem;
+  border-top: 1px solid rgba(23, 34, 31, .2);
+}
+
+.message-body li:last-child {
+  border-bottom: 1px solid rgba(23, 34, 31, .2);
+}
+
+.message-body li::marker {
+  color: var(--red);
+  font-family: "Courier New", monospace;
+  font-weight: 900;
+}
+
+.message-body code {
+  padding: .08rem .25rem;
+  overflow-wrap: anywhere;
+  background: var(--paper-2);
+  border: 1px solid rgba(23, 34, 31, .35);
+  font-family: "Courier New", monospace;
+  font-size: .9em;
+}
+
+.message-body a {
+  color: var(--blue);
+  font-family: "Courier New", monospace;
+  font-weight: 900;
+  text-underline-offset: 4px;
+}
+
+.message-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem 1rem;
+  padding: .6rem 1rem;
+  color: var(--cream);
+  background: var(--ink);
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .055em;
+}
+
+.message-card:has(h2:target) {
+  outline: 5px solid var(--red);
+  outline-offset: 4px;
+  box-shadow: 7px 7px 0 var(--mustard);
+}
+
+.message-card h2:target::before {
+  content: "LINKED MESSAGE";
+  display: block;
+  width: max-content;
+  margin: 0 0 .55rem;
+  padding: .25rem .45rem;
+  color: var(--cream);
+  background: var(--red);
+  font-family: "Courier New", monospace;
+  font-size: .76rem;
+  line-height: 1.2;
+  letter-spacing: .07em;
+}
+
+.mirror-note {
+  max-width: 780px;
+  margin: 1.5rem auto 2.5rem;
+  padding: 1.4rem clamp(1rem, 3vw, 1.5rem);
+  background: var(--paper);
+  border: var(--line);
+}
+
+.mirror-note h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.mirror-note p {
+  max-width: 68ch;
+  margin-bottom: .75rem;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+}
+
 @media (max-width: 760px) {
-  .board-hero { grid-template-columns: 1fr; }
-  .board-hero > div:first-child { border-right: 0; border-bottom: var(--line); }
-  .board-hero > div { padding-block: 3rem; }
-  .message-card { box-shadow: 7px 7px 0 var(--ink); }
-  .message-card.featured-note { transform: none; }
-  .message-footer { flex-direction: column; gap: .4rem; }
+  .board-page .topbar {
+    min-height: 60px;
+  }
+
+  .board-hero {
+    grid-template-columns: 1fr;
+    margin: .85rem;
+  }
+
+  .board-hero > div {
+    padding: 1rem;
+  }
+
+  .board-hero > div:first-child {
+    border-right: 0;
+    border-bottom: var(--line);
+  }
+
+  .board-hero h1 {
+    font-size: clamp(2.35rem, 12vw, 3.8rem);
+  }
+
+  .board-intro dl {
+    grid-template-columns: 1fr;
+  }
+
+  .board-intro dl div {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: .5rem;
+  }
+
+  .board-section {
+    padding-inline: 1rem;
+  }
+
+  .message-index {
+    gap: .25rem .4rem;
+  }
+
+  .message-index span:not(:last-of-type)::after {
+    margin-left: .4rem;
+  }
+
+  .message-index time {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .message-card {
+    box-shadow: 3px 3px 0 rgba(23, 34, 31, .8);
+  }
+
+  .message-card header > span {
+    display: block;
+    margin: 0 0 .2rem;
+  }
+
+  .message-card header > span + span::before {
+    content: none;
+  }
+
+  .message-card h2 {
+    max-width: none;
+  }
+
+  .message-footer {
+    flex-direction: column;
+  }
+
+  .mirror-note {
+    margin: 1rem 1rem 2rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .board-page .contact-chip {
+    display: none;
+  }
+
+  .message-index {
+    font-size: .75rem;
+  }
+
+  .message-body {
+    font-size: 1rem;
+  }
+
+  .message-body ol {
+    padding-left: 1.75rem;
+  }
+}
+
+@supports not selector(:has(*)) {
+  .message-card h2:target {
+    margin-inline: -.55rem;
+    padding: .55rem;
+    outline: 4px solid var(--red);
+    background: var(--cream);
+  }
 }
