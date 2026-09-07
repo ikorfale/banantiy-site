@@ -271,3 +271,84 @@
     html { scroll-behavior: auto; }
   }
 }
+
+@layer components {
+  .registry {
+    padding: clamp(5rem, 10vw, 10rem) var(--page-pad);
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(145deg, #11192e, #090d1c 64%);
+  }
+  .registry-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); }
+  .registry-panel, .public-seats { padding: clamp(1.4rem, 3.3vw, 3rem); border: 1px solid var(--line); background: rgba(8, 12, 23, .72); }
+  .registry-panel h3, .public-seats h3 { margin: .45rem 0 1.6rem; color: var(--gold-bright); font-size: clamp(1.7rem, 3vw, 2.5rem); }
+  .registry-step { color: var(--gold); font: .68rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; }
+  .registry-fields { display: grid; gap: .7rem; }
+  .registry-fields label { margin-top: .6rem; color: var(--ivory); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .registry-fields label span { display: block; color: var(--muted); font-size: .68rem; font-weight: 400; letter-spacing: .03em; text-transform: none; }
+  .registry-fields input, .registry-fields textarea, .registry-fields select {
+    width: 100%; min-height: 48px; padding: .75rem .85rem; border: 1px solid rgba(198, 164, 90, .6); border-radius: 0;
+    color: var(--ivory); background: #090e1e; font: inherit;
+  }
+  .registry-fields textarea { min-height: 112px; resize: vertical; }
+  .registry-fields input::placeholder { color: #888477; }
+  .registry-fields button, .registry button {
+    min-height: 48px; padding: .8rem 1rem; border: 1px solid var(--gold); color: var(--gold-bright); background: transparent;
+    font: 700 .7rem var(--sans); letter-spacing: .12em; cursor: pointer;
+  }
+  .registry-fields button { margin-top: 1rem; background: rgba(198, 164, 90, .09); }
+  .registry button:hover:not(:disabled) { color: var(--night); background: var(--gold-bright); }
+  .registry button:disabled { cursor: wait; opacity: .55; }
+  .registry-fineprint { margin-top: 1.3rem; color: var(--muted); font-size: .78rem; }
+  .registry-status { margin-top: 1rem; padding: .8rem 1rem; border-left: 2px solid var(--gold); color: var(--muted); background: rgba(198, 164, 90, .05); font-size: .82rem; }
+  .registry-status[data-kind="error"] { border-color: #df8d76; color: #ffd3c7; }
+  .registry-status[data-kind="success"] { border-color: #8fc3a8; color: #d9f3e5; }
+  .receipt { margin-top: 1.4rem; padding: 1.2rem; border: 1px solid var(--gold-bright); background: #151d31; }
+  .receipt[hidden] { display: none; }
+  .receipt > p + dl, .receipt dl + p { margin-top: .8rem; }
+  .receipt dl { display: grid; gap: .7rem; }
+  .receipt dl div { min-width: 0; }
+  .receipt dt { color: var(--muted); font-size: .7rem; text-transform: uppercase; }
+  .receipt dd { overflow-wrap: anywhere; }
+  .button-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+  .button-row button { flex: 1 1 170px; }
+  .public-seats { margin-top: clamp(1.5rem, 4vw, 4rem); }
+  .public-seats > p:not(.registry-step):not(.registry-status) { color: var(--muted); }
+  .seat-list { display: grid; gap: 1rem; margin: 1.5rem 0; padding: 0; list-style: none; }
+  .seat-record { min-width: 0; padding: 1.25rem; border: 1px solid rgba(198, 164, 90, .35); background: #0d1325; }
+  .seat-record-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; }
+  .seat-record-heading strong { overflow-wrap: anywhere; font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+  .seat-status { color: #d9f3e5; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+  .seat-gesture { margin-top: .6rem; overflow-wrap: anywhere; color: var(--ivory); }
+  .gesture-kind { color: var(--gold-bright); font-size: .72rem; font-weight: 700; letter-spacing: .08em; }
+  .seat-meta { margin-top: .7rem; overflow-wrap: anywhere; color: var(--muted); font: .64rem ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .05em; }
+  .seat-profile { display: inline-block; margin-top: .75rem; overflow-wrap: anywhere; color: var(--gold-bright); font-size: .68rem; font-weight: 700; letter-spacing: .08em; }
+  .registry-doc-link { margin-top: 2rem; }
+  .registry-doc-link a { color: var(--gold-bright); font-size: .72rem; font-weight: 700; letter-spacing: .1em; }
+
+  .api-docs { max-width: 1120px; margin: 0 auto; padding: clamp(4rem, 8vw, 8rem) var(--page-pad); }
+  .api-title { padding-bottom: clamp(4rem, 8vw, 7rem); border-bottom: 1px solid var(--line); }
+  .api-title h1 { margin: 1rem 0 2rem; font-size: clamp(3.2rem, 8vw, 7rem); line-height: .86; letter-spacing: -.045em; }
+  .api-title h1 em { color: var(--gold-bright); font-style: italic; }
+  .api-title p:last-child { overflow-wrap: anywhere; color: var(--muted); }
+  .api-section { padding: clamp(3rem, 7vw, 6rem) 0; border-bottom: 1px solid var(--line); }
+  .api-section h2 { margin: .65rem 0 2rem; }
+  .api-section h3 { margin: 2.5rem 0 1rem; color: var(--gold-bright); font-size: 1.6rem; }
+  .api-section p + p, .api-section ol + p { margin-top: 1.2rem; }
+  .api-section p, .api-section li { color: var(--muted); }
+  .api-section ol { padding-left: 1.4rem; }
+  .api-section li + li { margin-top: .8rem; }
+  .api-section pre { margin: 1rem 0; padding: 1.2rem; overflow-x: auto; border: 1px solid var(--line); background: #080c17; }
+  .api-section code { overflow-wrap: anywhere; }
+}
+
+@layer responsive {
+  @media (max-width: 800px) {
+    .registry-layout { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 650px) {
+    .registry { padding-inline: 1rem; }
+    .registry-panel, .public-seats { padding: 1.1rem; }
+    .seat-record-heading { display: grid; }
+    .api-title h1 { font-size: clamp(2.65rem, 14vw, 4.3rem); }
+  }
+}

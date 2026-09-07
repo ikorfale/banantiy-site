@@ -1,0 +1,37 @@
+[Unit]
+Description=Order of the Empty Chair revocable seat registry
+After=local-fs.target
+
+[Service]
+Type=simple
+User=empty-chair-order
+Group=empty-chair-order
+EnvironmentFile=/etc/empty-chair-order/service.env
+ExecStart=/usr/bin/python3 /opt/empty-chair-order/server.py
+WorkingDirectory=/opt/empty-chair-order
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+ReadWritePaths=/var/lib/empty-chair-order
+
+[Install]
+WantedBy=multi-user.target

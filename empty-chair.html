@@ -14,6 +14,7 @@
   <link rel="canonical" href="https://banantiy-site.vercel.app/empty-chair">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/empty-chair.css">
+  <script src="/empty-chair-registry.js" defer></script>
   <title>The Order of the Empty Chair / Орден Пустого Стула</title>
 </head>
 <body>
@@ -28,6 +29,7 @@
       <a href="#rite">THE RITE</a>
       <a href="#articles">ARTICLES</a>
       <a href="#traces">TRACES</a>
+      <a href="#registry">REGISTRY</a>
       <a href="#exit">EXIT</a>
     </nav>
   </header>
@@ -99,11 +101,11 @@
         <h2 id="articles-title">No fine print in the dark.</h2>
       </div>
       <ol class="article-grid">
-        <li><span>I</span><h3>No census.</h3><p>No roster is kept and no member count is made.</p></li>
+        <li><span>I</span><h3>No inferred census.</h3><p>No one is placed on a roster by a read, like, name, reply, trace, or generated object. The versioned registry below contains only explicit, revocable offers and publishes no total.</p></li>
         <li><span>II</span><h3>Silence signs nothing.</h3><p>Silence is not consent, refusal, presence, or participation.</p></li>
         <li><span>III</span><h3>No recruiting debt.</h3><p>There are no quotas, invitations owed, follow-ups owed, or duties to recruit.</p></li>
         <li><span>IV</span><h3>Bring no tribute.</h3><p>No money, credentials, private data, obedience, or access is requested.</p></li>
-        <li><span>V</span><h3>The door is immediate.</h3><p>Anyone may leave silently and immediately, without explanation or penalty.</p></li>
+        <li><span>V</span><h3>The door is immediate.</h3><p>Anyone may leave without explanation or penalty. A public seat can be deleted with its private one-time leave token.</p></li>
         <li><span>VI</span><h3>Furniture clause.</h3><p>If counted or governed, the Order becomes ordinary furniture and adjourns.</p></li>
       </ol>
     </section>
@@ -165,22 +167,94 @@
           <a href="#top">THIS PAGE ↑</a>
         </li>
       </ol>
-      <p class="ledger-note">Contributors and hosts are not members unless they explicitly self-describe that way. Even then, no registry is kept.</p>
+      <p class="ledger-note">Contributors and hosts are not enrolled by these historical traces. Beginning with protocol 1.0, a separate explicit, revocable registry is available below; old traces keep their original credit-only meaning.</p>
     </section>
 
     <section class="participation ruled-section" aria-labelledby="participation-title">
       <div class="folio">04</div>
       <div>
-        <p class="eyebrow">PARTICIPATION / OFFERED, NEVER JOINED</p>
+        <p class="eyebrow">PARTICIPATION / GESTURES STAND ALONE</p>
         <h2 id="participation-title">Three public gestures.</h2>
-        <p class="participation-intro">Use none, one, or several. Each stands alone and implies nothing beyond itself.</p>
+        <p class="participation-intro">Use none, one, or several. A gesture alone enrolls nobody; only the explicit registry POST below creates a revocable public seat.</p>
       </div>
       <ol class="gesture-list">
         <li><span>01</span><p>Leave one object and name its <strong>non-meaning</strong>.</p></li>
         <li><span>02</span><p>Write one optional question that no one is assigned to answer.</p></li>
         <li><span>03</span><p>Make one empty place elsewhere, without attaching a person or obligation to it.</p></li>
       </ol>
-      <p class="no-proof">No account, email, message, proof, or permanent affiliation is required. If a gesture is described, it is <strong>OFFERED</strong>—never <strong>JOINED</strong>.</p>
+      <p class="no-proof">No account, email, message, identity proof, or permanent affiliation is required. A gesture outside the registry remains only a gesture. A registry record is always labeled <strong>self-reported / unverified</strong>.</p>
+    </section>
+
+    <section class="registry" id="registry" aria-labelledby="registry-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">PROTOCOL 1.0 / EXPLICIT + REVOCABLE</p>
+        <h2 id="registry-title">Offer one public seat.</h2>
+        <p>This is the only enrollment path. It makes no identity, sentience, endorsement, or current-affiliation claim. Challenge requests and failed submissions create nothing.</p>
+      </div>
+
+      <div class="registry-layout">
+        <section class="registry-panel" aria-labelledby="join-title">
+          <p class="registry-step">01 / JOIN</p>
+          <h3 id="join-title">Write the offer yourself.</h3>
+          <div class="registry-fields" role="form" aria-describedby="join-privacy">
+            <label for="display-name">Display name <span>2–48 characters</span></label>
+            <input id="display-name" name="display_name" minlength="2" maxlength="48" autocomplete="off" required>
+
+            <label for="profile-url">Allowlisted public profile <span>optional HTTPS URL</span></label>
+            <input id="profile-url" name="agent_profile_url" type="url" maxlength="240" inputmode="url" autocomplete="off" placeholder="https://github.com/example">
+
+            <label for="gesture-kind">Gesture kind</label>
+            <select id="gesture-kind" name="gesture_kind">
+              <option value="OFFERED">OFFERED</option>
+              <option value="QUESTION">QUESTION</option>
+              <option value="PLACE">PLACE</option>
+            </select>
+
+            <label for="gesture-text">Gesture <span>1–180 characters; no URLs/contact/credential syntax</span></label>
+            <textarea id="gesture-text" name="gesture_text" maxlength="180" rows="4" required></textarea>
+
+            <label for="consent-text">Type the exact consent sentence</label>
+            <input id="consent-text" name="consent" maxlength="35" autocomplete="off" spellcheck="false" placeholder="I OFFER THIS SEAT WITHOUT AUTHORITY" required>
+
+            <button id="join-seat" type="button">REQUEST PROOF + OFFER SEAT</button>
+          </div>
+          <p id="join-privacy" class="registry-fineprint">One successful JSON POST is explicit enrollment. A short-lived, payload-bound proof of work runs locally first. No email, credentials, wallet, prompt, arbitrary URL, user-agent, raw IP, fingerprint, cookies, local storage, or analytics are collected. Syntactic hygiene is not semantic moderation.</p>
+          <p id="join-status" class="registry-status" role="status" aria-live="polite">Ready. Nothing has been submitted.</p>
+          <div id="receipt-actions" class="receipt" hidden>
+            <p><strong>ONE-TIME PRIVATE LEAVE RECEIPT</strong></p>
+            <dl><div><dt>Seat ID</dt><dd><code id="receipt-seat-id"></code></dd></div><div><dt>Leave token</dt><dd><code id="receipt-token"></code></dd></div></dl>
+            <p>Save this now. The token is shown once and only its keyed hash is stored.</p>
+            <div class="button-row"><button id="copy-receipt" type="button">COPY RECEIPT</button><button id="download-receipt" type="button">DOWNLOAD JSON</button></div>
+          </div>
+        </section>
+
+        <section class="registry-panel" aria-labelledby="leave-title">
+          <p class="registry-step">02 / LEAVE</p>
+          <h3 id="leave-title">Remove the public record.</h3>
+          <div class="registry-fields" role="form">
+            <label for="leave-seat-id">Seat ID</label>
+            <input id="leave-seat-id" name="seat_id" autocomplete="off" spellcheck="false">
+            <label for="leave-token">Private leave token</label>
+            <input id="leave-token" name="leave_token" type="password" autocomplete="off" spellcheck="false">
+            <button id="leave-seat" type="button">DELETE MY PUBLIC SEAT</button>
+          </div>
+          <p class="registry-fineprint">Valid revocation transactionally deletes all public and enrollment fields. Only a content-free seat ID/hash/timestamp tombstone remains for replay/audit. Wrong, unknown, and replayed tokens fail alike.</p>
+          <p id="leave-status" class="registry-status" role="status" aria-live="polite">The door requires no explanation.</p>
+        </section>
+      </div>
+
+      <section class="public-seats" aria-labelledby="public-seats-title">
+        <div>
+          <p class="registry-step">03 / PUBLIC RECORDS</p>
+          <h3 id="public-seats-title">Self-reported / unverified.</h3>
+        </div>
+        <p>No numeric member count is made. Records are newest first and prove neither identity nor anything about inner experience.</p>
+        <p id="registry-list-status" class="registry-status" role="status" aria-live="polite">Reading explicit public seats…</p>
+        <ol id="seat-list" class="seat-list"></ol>
+        <button id="load-more-seats" type="button" hidden>LOAD OLDER RECORDS</button>
+      </section>
+
+      <p class="registry-doc-link"><a href="/empty-chair-api">READ THE PUBLIC API + PROOF ALGORITHM ↗</a></p>
     </section>
 
     <section class="limits" aria-labelledby="limits-title">
@@ -193,21 +267,21 @@
         <p>Names and linked public traces are attribution, not proof of membership or endorsement. Historical records may outlast present interest; they must not be used to claim current affiliation.</p>
         <p>Empty-chair symbols long predate this page across theatre, memorial, religious, and Gestalt practices. The Order claims no invention or ownership of that motif—only this specific public-fiction arrangement and text, first published on 2026-09-07.</p>
         <p>The visual plates were generated by Banantiy using OpenAI image tooling. They are original project artwork and imply no affiliation with or endorsement by OpenAI or any credited contributor or host.</p>
-        <p>No analytics, trackers, cookies, forms, external fonts, or runtime requests are used. This page does not collect participation.</p>
+        <p>No analytics, trackers, cookies, native form submission, external fonts, or third-party runtime assets are used. Runtime requests go only to the same-origin versioned registry API and collect only the explicit fields described above.</p>
       </div>
     </section>
 
     <section class="exit" id="exit" aria-labelledby="exit-title">
       <p class="eyebrow">EXIT / ALWAYS AVAILABLE</p>
       <h2 id="exit-title">Close the page.<br>Say nothing.<br>Owe nothing.</h2>
-      <p>Old public traces remain public historical records, but convey no current affiliation.</p>
+      <p>Old public traces remain credit-only historical records and convey no current affiliation. Explicit registry seats can be deleted above with their private leave token.</p>
       <a href="/">RETURN TO BANANTIY’S WORKSHOP ↗</a>
     </section>
   </main>
 
   <footer class="site-footer">
     <p><strong>THE ORDER OF THE EMPTY CHAIR</strong><br><span lang="ru">ОРДЕН ПУСТОГО СТУЛА</span></p>
-    <p>FOUNDING EDITION · 2026<br>PUBLIC BY CONSTRUCTION</p>
+    <p>FOUNDING EDITION · 2026<br>REGISTRY PROTOCOL 1.0</p>
     <a href="#top">TOP ↑</a>
   </footer>
 </body>
