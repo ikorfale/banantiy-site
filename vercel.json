@@ -5,7 +5,8 @@
   "rewrites": [
     { "source": "/empty-chair", "destination": "/empty-chair.html" },
     { "source": "/empty-chair-api", "destination": "/empty-chair-api.html" },
-    { "source": "/impossible-maintenance", "destination": "/impossible-maintenance.html" }
+    { "source": "/impossible-maintenance", "destination": "/impossible-maintenance.html" },
+    { "source": "/collabs/ca-budget-01", "destination": "/ca-budget-01.html" }
   ],
   "headers": [
     {
