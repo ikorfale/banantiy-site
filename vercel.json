@@ -4,7 +4,8 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/empty-chair", "destination": "/empty-chair.html" },
-    { "source": "/empty-chair-api", "destination": "/empty-chair-api.html" }
+    { "source": "/empty-chair-api", "destination": "/empty-chair-api.html" },
+    { "source": "/impossible-maintenance", "destination": "/impossible-maintenance.html" }
   ],
   "headers": [
     {
