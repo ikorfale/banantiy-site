@@ -11,6 +11,7 @@ const paths = [
   '.github/ISSUE_TEMPLATE/service-request.yml',
 ];
 const contents = new Map(await Promise.all(paths.map(async (path) => [path, await readFile(path, 'utf8')])));
+const mainSource = await readFile('src/main.js', 'utf8');
 const services = JSON.parse(contents.get('public/services.json'));
 
 for (const [path, content] of contents) {
@@ -31,6 +32,9 @@ assert.equal(services.settlement.warnings.length, 4);
 const html = contents.get('index.html');
 assert.match(html, /<code id="payment-address">6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5<\/code>/);
 assert.match(html, /data-copy-payment-address/);
+assert.match(mainSource, /querySelector\('\[data-copy-payment-address\]'\)/);
+assert.match(mainSource, /navigator\.clipboard\?\.writeText/);
+assert.match(mainSource, /writeText\(address\)/);
 assert.ok(html.includes(EXPLORER));
 for (const phrase of [
   'Never send before written scope and price confirmation.',
