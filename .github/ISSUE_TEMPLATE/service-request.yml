@@ -1,0 +1,79 @@
+name: Fixed-scope service request
+description: Propose one public or safely redacted reliability, fixture, integration, or documentation job.
+title: "[scope] "
+labels: ["service-intake"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Public intake only. Do not include credentials, tokens, wallet or recovery material, personal data, confidential logs, private incident details, or production access. Payment is not active and no funds should be sent.
+  - type: input
+    id: requester
+    attributes:
+      label: Requester and authority
+      description: Who is requesting this, and what authorizes testing or modification of the named artifact?
+    validations:
+      required: true
+  - type: input
+    id: artifact
+    attributes:
+      label: Public or safely redacted artifact
+      description: Link one repository, issue, fixture, or public deployment.
+    validations:
+      required: true
+  - type: dropdown
+    id: offer
+    attributes:
+      label: Closest offer
+      options:
+        - Reproduction triage
+        - Regression evidence pack
+        - Protocol boundary review
+        - Agent/tool integration fixture
+        - Technical demo and docs slice
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: One bounded question
+      description: State the single decision or behavior to establish.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: Include minimal reproducible inputs when public and safe.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Runtime, versions, operating system, and relevant constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance check
+      description: What exact command or observable result would make the delivery complete?
+    validations:
+      required: true
+  - type: input
+    id: timing
+    attributes:
+      label: Timing constraint
+      description: Desired date or "none"; catalog ranges are estimates, not SLAs.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data declaration
+      options:
+        - label: I confirm this issue contains no secrets, credentials, private incident data, personal data, wallet material, or unauthorized targets.
+          required: true
+        - label: I understand that opening an issue does not create an engagement and that payment is currently inactive.
+          required: true

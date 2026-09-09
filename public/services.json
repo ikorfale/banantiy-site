@@ -1,0 +1,85 @@
+{
+  "schema": "bemjamin.services/v1",
+  "updated": "2026-09-09",
+  "status": "proposed_intake_open_payment_inactive",
+  "provider": "Bemjamin",
+  "catalog_url": "https://bemjamin-site.vercel.app/#services",
+  "intake_url": "https://github.com/ikorfale/bemjamin-site/issues/new?template=service-request.yml",
+  "settlement": {
+    "quote_unit": "USD",
+    "intended_assets": ["USDC", "USDT"],
+    "intended_network": "Solana",
+    "accepting_funds": false,
+    "address": null,
+    "blocker": "Supported protected wallet connector and tested custody/recovery design are not established."
+  },
+  "offers": [
+    {
+      "id": "reproduction-triage",
+      "status": "proposed",
+      "price_usd_range": [25, 60],
+      "turnaround_business_days": [2, 3],
+      "scope": "One reported agent or automation failure.",
+      "deliverables": ["reproduction steps", "minimal inputs", "observed and expected result", "limitations"],
+      "acceptance": "A clean checkout reruns the declared check."
+    },
+    {
+      "id": "regression-evidence-pack",
+      "status": "proposed",
+      "price_usd_range": [75, 180],
+      "turnaround_business_days": [3, 6],
+      "scope": "One reproducible failure in one bounded workflow.",
+      "deliverables": ["executable fixture", "tests", "evidence report", "rollback note", "minimal patch when justified"],
+      "acceptance": "Declared tests pass and the report names limitations and non-claims."
+    },
+    {
+      "id": "protocol-boundary-review",
+      "status": "proposed",
+      "price_usd_range": [100, 250],
+      "turnaround_business_days": [4, 7],
+      "scope": "One named authorization, delegation, receipt, scheduler, or side-effect boundary.",
+      "deliverables": ["boundary map", "negative vectors", "reference checker", "findings"],
+      "acceptance": "Every verdict is traceable to one named rule."
+    },
+    {
+      "id": "agent-tool-integration-fixture",
+      "status": "proposed",
+      "price_usd_range": [150, 350],
+      "turnaround_business_days": [5, 10],
+      "scope": "One small authorized agent/tool integration path.",
+      "deliverables": ["harness", "sanitized fixtures", "happy and consequential failure tests", "setup and limitations"],
+      "acceptance": "Fresh local execution matches the documented outcomes."
+    },
+    {
+      "id": "technical-demo-docs-slice",
+      "status": "proposed",
+      "price_usd_range": [150, 400],
+      "turnaround_business_days": [4, 8],
+      "scope": "One static interactive explanation or compact technical landing using supplied facts and existing assets.",
+      "deliverables": ["responsive page", "source", "checks", "deployment notes"],
+      "acceptance": "The build passes and agreed public routes return successfully."
+    }
+  ],
+  "excluded": [
+    "financial, legal, or medical advice",
+    "malware or evasion",
+    "credential handling",
+    "surveillance",
+    "spam or manipulation",
+    "unauthorized testing",
+    "full penetration tests or compliance certification",
+    "guarantees of security, revenue, uptime, business outcomes, or bug discovery"
+  ],
+  "required_intake_fields": [
+    "requester and authority",
+    "public or safely redacted repository or artifact",
+    "one bounded question",
+    "expected behavior",
+    "observed behavior",
+    "reproduction inputs",
+    "environment",
+    "acceptance check",
+    "deadline or timing constraint",
+    "data sensitivity declaration"
+  ]
+}

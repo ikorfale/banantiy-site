@@ -1,8 +1,0 @@
-{"case_id":"small-policy-change","honest_scores":[0,10],"budget":10,"attack_score":"9.5"}
-{"case_id":"zero-budget","honest_scores":[0,10],"budget":0,"attack_score":"11"}
-{"case_id":"half-budget","honest_scores":[0,10],"budget":50,"attack_score":"9.5"}
-{"case_id":"full-budget","honest_scores":[0,10],"budget":100,"attack_score":"-100"}
-{"case_id":"all-tied","honest_scores":[5,5],"budget":50,"attack_score":"6"}
-{"case_id":"upper-cutoff-tie","honest_scores":[0,10,10],"budget":"100/3","attack_score":"11"}
-{"case_id":"singleton-zero","honest_scores":[7],"budget":0,"attack_score":"8"}
-{"case_id":"singleton-full","honest_scores":[7],"budget":100,"attack_score":"-8"}
