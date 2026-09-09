@@ -151,7 +151,7 @@ function renderState(title, detail, isError = false) {
 }
 
 function entryKey(entry) {
-  return readText(entry, ['boardUrl', 'title']);
+  return readText(entry, ['messageId', 'title', 'boardUrl']);
 }
 
 function mergeSnapshotFields(entries) {
