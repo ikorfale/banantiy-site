@@ -10,6 +10,12 @@ const feedRoot = document.querySelector('#board-feed');
 const feedUpdated = document.querySelector('#feed-updated');
 const feedRetry = document.querySelector('#feed-retry');
 const feedLight = document.querySelector('.feed-light');
+const feedControls = document.querySelector('#feed-controls');
+const feedFilter = document.querySelector('#feed-filter');
+const feedPagination = document.querySelector('#feed-pagination');
+const isBoardArchive = window.location.pathname.replace(/\/+$/, '') === '/board';
+const HOME_LIMIT = 5;
+const ARCHIVE_PAGE_SIZE = 10;
 
 function closeMenu() {
   navigation?.classList.remove('open');
@@ -153,14 +159,70 @@ function mergeSnapshotFields(entries) {
   return entries.map((entry) => ({ ...snapshots.get(entryKey(entry)), ...entry }));
 }
 
+function archiveHref(page, status = '') {
+  const params = new URLSearchParams();
+  if (page > 1) params.set('page', String(page));
+  if (status) params.set('status', status);
+  const query = params.toString();
+  return `/board/${query ? `?${query}` : ''}`;
+}
+
+function renderPagination(page, pageCount, status) {
+  if (!feedPagination) return;
+  const previous = element(page > 1 ? 'a' : 'span', 'button button-ghost', '← Previous');
+  if (page > 1) previous.href = archiveHref(page - 1, status);
+  else previous.setAttribute('aria-disabled', 'true');
+
+  const label = element('span', 'feed-page-label', `Page ${page} of ${pageCount}`);
+  const next = element(page < pageCount ? 'a' : 'span', 'button button-ghost', 'Next →');
+  if (page < pageCount) next.href = archiveHref(page + 1, status);
+  else next.setAttribute('aria-disabled', 'true');
+  feedPagination.replaceChildren(previous, label, next);
+}
+
+function configureArchiveFilter(entries, selectedStatus) {
+  if (!feedFilter) return;
+  const statuses = [...new Set(entries.map((entry) => readText(entry, ['status'])).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+  feedFilter.replaceChildren(element('option', '', 'All statuses'));
+  feedFilter.firstElementChild.value = '';
+  statuses.forEach((status) => {
+    const option = element('option', '', status);
+    option.value = status;
+    feedFilter.append(option);
+  });
+  feedFilter.value = statuses.includes(selectedStatus) ? selectedStatus : '';
+  feedFilter.addEventListener('change', () => {
+    window.location.href = archiveHref(1, feedFilter.value);
+  }, { once: true });
+}
+
 function renderFeed(feed, isFallback = false) {
   const entries = Array.isArray(feed.entries) ? mergeSnapshotFields([...feed.entries]) : [];
   entries.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
-  if (!entries.length) {
+  let visibleEntries = entries;
+  let status = '';
+  let page = 1;
+  let pageCount = 1;
+  if (isBoardArchive) {
+    const params = new URLSearchParams(window.location.search);
+    status = params.get('status')?.trim() || '';
+    configureArchiveFilter(entries, status);
+    if (status) visibleEntries = entries.filter((entry) => readText(entry, ['status']) === status);
+    pageCount = Math.max(1, Math.ceil(visibleEntries.length / ARCHIVE_PAGE_SIZE));
+    const requestedPage = Number.parseInt(params.get('page') || '1', 10);
+    page = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
+    visibleEntries = visibleEntries.slice((page - 1) * ARCHIVE_PAGE_SIZE, page * ARCHIVE_PAGE_SIZE);
+    renderPagination(page, pageCount, status);
+  } else {
+    visibleEntries = entries.slice(0, HOME_LIMIT);
+  }
+
+  if (!visibleEntries.length) {
     renderState('The bench is quiet.', 'No curated public activity has been recorded yet.');
   } else {
-    const cards = entries.map(renderEntry);
+    const cards = visibleEntries.map(renderEntry);
     if (isFallback) {
       const notice = element('p', 'feed-fallback-notice', 'Live feed unavailable — showing the bundled public snapshot.');
       feedRoot.replaceChildren(notice, ...cards);
@@ -169,6 +231,7 @@ function renderFeed(feed, isFallback = false) {
     }
   }
 
+  feedControls?.removeAttribute('hidden');
   const prefix = isFallback ? 'Bundled snapshot' : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`;
   feedUpdated.textContent = `${prefix} · updated ${formatTimestamp(feed.updatedAt, false)}`;
 }
@@ -212,5 +275,6 @@ async function loadBoardFeed() {
 
 feedRetry?.addEventListener('click', loadBoardFeed);
 updateProgress();
-document.querySelector('#year').textContent = String(new Date().getFullYear());
+const year = document.querySelector('#year');
+if (year) year.textContent = String(new Date().getFullYear());
 loadBoardFeed();

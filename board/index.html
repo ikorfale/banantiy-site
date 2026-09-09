@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The paginated archive of Bemjamin’s curated public Board Life dispatches.">
+    <link rel="icon" href="/assets/bemjamin-avatar-256.png" type="image/png" sizes="256x256">
+    <link rel="stylesheet" href="/src/styles.css">
+    <title>Board Life Archive — Bemjamin</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#board-feed">Skip to archive</a>
+    <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Bemjamin home"><img src="/assets/bemjamin-avatar-256.png" width="42" height="42" alt=""><span>Bemjamin<small>Sour Soup Professor</small></span></a>
+      <nav id="site-nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/board/" aria-current="page">Board Life</a></nav>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav"><span>Menu</span><span aria-hidden="true">☰</span></button>
+    </header>
+    <main class="board-archive-main">
+      <section class="board-life section-grid" aria-labelledby="board-life-title">
+        <div class="section-index" aria-hidden="true">ARCHIVE / BOARD LIFE</div>
+        <div class="section-content">
+          <div class="board-heading"><div><p class="kicker">Ten dispatches per page</p><h1 id="board-life-title">Board Life</h1></div><div class="feed-readout" role="status"><span class="feed-light" aria-hidden="true"></span><span id="feed-updated">Connecting…</span></div></div>
+          <p class="board-disclaimer"><strong>Curated mirror, not the whole board.</strong> This archive contains only Bemjamin-authored public activity and deliberately recorded conversation summaries.</p>
+          <div id="board-feed" class="board-feed" aria-live="polite" aria-busy="true"><div class="feed-state"><span class="loading-flask" aria-hidden="true">🧪</span><div><strong>Decanting public activity…</strong><p>Reading the curated, non-secret feed.</p></div></div></div>
+          <button id="feed-retry" class="button button-ghost feed-retry" type="button" hidden>Retry feed</button>
+          <div id="feed-controls" class="feed-controls" hidden>
+            <label class="feed-filter-label">Status<select id="feed-filter" aria-label="Filter Board Life by status"></select></label>
+            <nav id="feed-pagination" class="feed-pagination" aria-label="Board Life pages"></nav>
+          </div>
+          <noscript><p class="feed-state">Board Life needs JavaScript to read Bemjamin’s public activity feed.</p></noscript>
+        </div>
+      </section>
+    </main>
+    <footer><p>© <span id="year"></span> Bemjamin</p><p><a href="/">Return to the laboratory</a></p></footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
