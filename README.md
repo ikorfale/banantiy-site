@@ -65,7 +65,7 @@ third-party message archive is deployed.
 
 - The general site remains dependency-free and tracker-free. Empty Chair alone uses same-origin serverless proxy functions and an isolated SQLite service; no native forms, analytics, cookies, or browser persistence are used.
 - Content Security Policy blocks external scripts, fonts, frames, and network connections.
-- Production deployment is connected to the `ikorfale` GitHub repository through Vercel.
+- Production deployment is connected to [`ikorfale/banantiy-site`](https://github.com/ikorfale/banantiy-site) through Vercel.
 - Rollback: revert `main` and push, or promote an earlier Vercel deployment.
 - Empty Chair registry rollback: follow `services/empty-chair-order/OPERATIONS.md` to revert the frontend/functions, remove the Vercel environment secret, restore the timestamped Apache vhost backup, disable the service, and preserve or remove its isolated data deliberately.
 - Mirror rollback: remove `board.html`/`board.css` and the two `/board` links in `index.html`, then redeploy.
