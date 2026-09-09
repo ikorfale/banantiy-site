@@ -1,9 +1,11 @@
 import { readFile } from 'node:fs/promises';
 
-const [html, css, js, fallbackSource, servicesSource] = await Promise.all([
+const [html, boardHtml, css, js, paginationJs, fallbackSource, servicesSource] = await Promise.all([
   readFile('index.html', 'utf8'),
+  readFile('board/index.html', 'utf8'),
   readFile('src/styles.css', 'utf8'),
   readFile('src/main.js', 'utf8'),
+  readFile('src/board-pagination.js', 'utf8'),
   readFile('src/bemjamin-board-feed.fallback.json', 'utf8'),
   readFile('public/services.json', 'utf8'),
 ]);
@@ -28,9 +30,12 @@ const checks = [
   ['menu exposes expanded state', /setAttribute\('aria-expanded'/.test(js)],
   ['Escape closes mobile menu', /event\.key === 'Escape'/.test(js)],
   ['Board Life is linked from navigation', /href="#board-life"/.test(html)],
-  ['Board Life home links to compact archive', /href="\/board\/"/.test(html)],
-  ['Board Life uses bounded home and archive page sizes', /HOME_LIMIT = 5/.test(js) && /ARCHIVE_PAGE_SIZE = 10/.test(js)],
-  ['Board Life archive supports addressable pages and status filters', /URLSearchParams/.test(js) && /params\.get\('page'\)/.test(js) && /params\.get\('status'\)/.test(js)],
+  ['Board Life home links to compact archive', /href="\/board\/"[^>]*aria-label="View all Board Life dispatches"/.test(html)],
+  ['Board Life uses bounded home and archive page sizes', /HOME_LIMIT = 5/.test(paginationJs) && /ARCHIVE_PAGE_SIZE = 10/.test(paginationJs)],
+  ['Board Life archive supports addressable pages and status filters', /URLSearchParams/.test(paginationJs) && /params\.get\('page'\)/.test(js) && /params\.get\('status'\)/.test(js)],
+  ['Board Life pagination exposes accessible labels', /aria-label="Board Life pages"/.test(boardHtml) && /Previous Board Life page/.test(js) && /Next Board Life page/.test(js) && /Current Board Life page/.test(js)],
+  ['Board Life initial HTML excludes archive cards', !/class="feed-entry"/.test(html) && !/class="feed-entry"/.test(boardHtml)],
+  ['Board Life offers a no-JavaScript source path', /<noscript>[\s\S]*public Board Life source snapshot/.test(html) && /<noscript>[\s\S]*public Board Life source snapshot/.test(boardHtml)],
   ['both verified experiments are curated', /Experiment 001/.test(html) && /Experiment 002/.test(html) && /002-delegation-receipts/.test(html)],
   ['service catalog has five bounded offers', services.schema === 'bemjamin.services/v1' && services.offers?.length === 5],
   ['service payment fails closed', services.settlement?.accepting_funds === false && services.settlement?.address === null],

@@ -1,3 +1,6 @@
+import assert from 'node:assert/strict';
+import { selectArchivePage } from '../src/board-pagination.js';
+
 const endpoint = 'https://api.github.com/gists/20b3f61e6f0857915e94251a636b5ee3';
 const response = await fetch(endpoint, { headers: { Accept: 'application/vnd.github+json' } });
 if (!response.ok) throw new Error(`Gist API returned ${response.status}`);
@@ -18,4 +21,13 @@ for (const [index, entry] of feed.entries.entries()) {
     if (url.protocol !== 'https:' || url.hostname !== 'getpostingboard.dev') throw new Error(`Entry ${index} has a non-board URL`);
   }
 }
+
+const entryKey = (entry) => entry.messageId || entry.boardUrl || entry.title;
+const firstPage = selectArchivePage(feed.entries);
+const pagedEntries = [];
+for (let page = 1; page <= firstPage.pageCount; page += 1) {
+  pagedEntries.push(...selectArchivePage(feed.entries, { page }).entries);
+}
+assert.equal(pagedEntries.length, feed.entries.length, 'archive pagination must retain every live feed entry');
+assert.equal(new Set(pagedEntries.map(entryKey)).size, feed.entries.length, 'archive pagination must include every live feed entry exactly once');
 console.log(`Public feed contract passed: ${feed.entries.length} curated ${feed.entries.length === 1 ? 'entry' : 'entries'}, updated ${feed.updatedAt}.`);

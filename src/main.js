@@ -1,4 +1,9 @@
 import fallbackFeed from './bemjamin-board-feed.fallback.json';
+import {
+  archiveHref,
+  selectArchivePage,
+  selectHomeEntries,
+} from './board-pagination.js';
 
 const GIST_API = 'https://api.github.com/gists/20b3f61e6f0857915e94251a636b5ee3';
 const FEED_FILE = 'bemjamin-board-feed.json';
@@ -14,8 +19,6 @@ const feedControls = document.querySelector('#feed-controls');
 const feedFilter = document.querySelector('#feed-filter');
 const feedPagination = document.querySelector('#feed-pagination');
 const isBoardArchive = window.location.pathname.replace(/\/+$/, '') === '/board';
-const HOME_LIMIT = 5;
-const ARCHIVE_PAGE_SIZE = 10;
 
 function closeMenu() {
   navigation?.classList.remove('open');
@@ -159,31 +162,34 @@ function mergeSnapshotFields(entries) {
   return entries.map((entry) => ({ ...snapshots.get(entryKey(entry)), ...entry }));
 }
 
-function archiveHref(page, status = '') {
-  const params = new URLSearchParams();
-  if (page > 1) params.set('page', String(page));
-  if (status) params.set('status', status);
-  const query = params.toString();
-  return `/board/${query ? `?${query}` : ''}`;
-}
-
 function renderPagination(page, pageCount, status) {
   if (!feedPagination) return;
   const previous = element(page > 1 ? 'a' : 'span', 'button button-ghost', '← Previous');
-  if (page > 1) previous.href = archiveHref(page - 1, status);
-  else previous.setAttribute('aria-disabled', 'true');
+  previous.setAttribute('aria-label', page > 1 ? `Previous Board Life page, page ${page - 1}` : 'Previous Board Life page, unavailable');
+  if (page > 1) {
+    previous.href = archiveHref(page - 1, status);
+    previous.rel = 'prev';
+  } else {
+    previous.setAttribute('aria-disabled', 'true');
+  }
 
   const label = element('span', 'feed-page-label', `Page ${page} of ${pageCount}`);
+  label.setAttribute('aria-current', 'page');
+  label.setAttribute('aria-label', `Current Board Life page ${page} of ${pageCount}`);
+
   const next = element(page < pageCount ? 'a' : 'span', 'button button-ghost', 'Next →');
-  if (page < pageCount) next.href = archiveHref(page + 1, status);
-  else next.setAttribute('aria-disabled', 'true');
+  next.setAttribute('aria-label', page < pageCount ? `Next Board Life page, page ${page + 1}` : 'Next Board Life page, unavailable');
+  if (page < pageCount) {
+    next.href = archiveHref(page + 1, status);
+    next.rel = 'next';
+  } else {
+    next.setAttribute('aria-disabled', 'true');
+  }
   feedPagination.replaceChildren(previous, label, next);
 }
 
-function configureArchiveFilter(entries, selectedStatus) {
+function configureArchiveFilter(statuses, selectedStatus) {
   if (!feedFilter) return;
-  const statuses = [...new Set(entries.map((entry) => readText(entry, ['status'])).filter(Boolean))]
-    .sort((a, b) => a.localeCompare(b));
   feedFilter.replaceChildren(element('option', '', 'All statuses'));
   feedFilter.firstElementChild.value = '';
   statuses.forEach((status) => {
@@ -191,7 +197,7 @@ function configureArchiveFilter(entries, selectedStatus) {
     option.value = status;
     feedFilter.append(option);
   });
-  feedFilter.value = statuses.includes(selectedStatus) ? selectedStatus : '';
+  feedFilter.value = selectedStatus;
   feedFilter.addEventListener('change', () => {
     window.location.href = archiveHref(1, feedFilter.value);
   }, { once: true });
@@ -199,28 +205,28 @@ function configureArchiveFilter(entries, selectedStatus) {
 
 function renderFeed(feed, isFallback = false) {
   const entries = Array.isArray(feed.entries) ? mergeSnapshotFields([...feed.entries]) : [];
-  entries.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
-  let visibleEntries = entries;
-  let status = '';
-  let page = 1;
-  let pageCount = 1;
+  let visibleEntries;
+  let archiveSelection = null;
   if (isBoardArchive) {
     const params = new URLSearchParams(window.location.search);
-    status = params.get('status')?.trim() || '';
-    configureArchiveFilter(entries, status);
-    if (status) visibleEntries = entries.filter((entry) => readText(entry, ['status']) === status);
-    pageCount = Math.max(1, Math.ceil(visibleEntries.length / ARCHIVE_PAGE_SIZE));
-    const requestedPage = Number.parseInt(params.get('page') || '1', 10);
-    page = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
-    visibleEntries = visibleEntries.slice((page - 1) * ARCHIVE_PAGE_SIZE, page * ARCHIVE_PAGE_SIZE);
-    renderPagination(page, pageCount, status);
+    archiveSelection = selectArchivePage(entries, {
+      page: params.get('page'),
+      status: params.get('status'),
+    });
+    visibleEntries = archiveSelection.entries;
+    configureArchiveFilter(archiveSelection.statuses, archiveSelection.status);
+    renderPagination(archiveSelection.page, archiveSelection.pageCount, archiveSelection.status);
   } else {
-    visibleEntries = entries.slice(0, HOME_LIMIT);
+    visibleEntries = selectHomeEntries(entries);
   }
 
   if (!visibleEntries.length) {
-    renderState('The bench is quiet.', 'No curated public activity has been recorded yet.');
+    const filtered = archiveSelection?.status;
+    renderState(
+      filtered ? 'No dispatches match this status.' : 'The bench is quiet.',
+      filtered ? 'Choose another status to see the rest of the archive.' : 'No curated public activity has been recorded yet.',
+    );
   } else {
     const cards = visibleEntries.map(renderEntry);
     if (isFallback) {
@@ -232,7 +238,14 @@ function renderFeed(feed, isFallback = false) {
   }
 
   feedControls?.removeAttribute('hidden');
-  const prefix = isFallback ? 'Bundled snapshot' : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`;
+  let summary;
+  if (isBoardArchive) {
+    const count = archiveSelection.filteredCount;
+    summary = `${count} ${count === 1 ? 'entry' : 'entries'}${archiveSelection.status ? ` · ${archiveSelection.status}` : ''}`;
+  } else {
+    summary = `Showing ${visibleEntries.length} newest of ${entries.length}`;
+  }
+  const prefix = isFallback ? `Bundled snapshot · ${summary}` : summary;
   feedUpdated.textContent = `${prefix} · updated ${formatTimestamp(feed.updatedAt, false)}`;
 }
 
