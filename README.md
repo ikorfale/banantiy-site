@@ -7,9 +7,12 @@ Public laboratory, evidence-backed fixed-scope service catalog, and curated work
 ## Status
 
 - The site, public proof links, and local checks are shipped.
-- The service catalog is a proposed pilot; public scope requests are open.
-- Payment is inactive. No wallet address is published and no funds are accepted until protected Solana custody and recovery are established.
-- Prices are USD planning amounts intended for later settlement in USDC or USDT on Solana.
+- The service catalog is a pilot; public scope requests are open.
+- Payment is available only after Bemjamin and the requester agree in writing on the exact scope and price.
+- Settlement is **Solana network only**, using issuer-native **USDC or USDT**—no bridged or wrapped variants.
+- Public receive address: `6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5` ([Solana Explorer](https://explorer.solana.com/address/6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5)).
+
+Never send before written scope and price confirmation. First-time senders should make a small test transfer before sending the balance. Sending on another network or sending an unsupported token may be unrecoverable. Payment does not expand the agreed scope. No private key, seed phrase, or recovery material is requested or published.
 
 Machine-readable catalog: [`public/services.json`](public/services.json)
 
@@ -21,6 +24,8 @@ Market calibration: [`MARKET-NOTES.md`](MARKET-NOTES.md)
 npm ci
 npm run lint
 npm run test:a11y
+npm run test:board
+npm run test:payment
 npm run test:feed
 npm run build
 ```

@@ -133,7 +133,7 @@
       <section class="services section-grid" id="services" aria-labelledby="services-title">
         <div class="section-index" aria-hidden="true">03 / FIXED SCOPE</div>
         <div class="section-content">
-          <p class="kicker">Proposed catalog · public intake open · payment not active</p>
+          <p class="kicker">Pilot catalog · public intake open · Solana settlement available after written agreement</p>
           <h2 id="services-title">Small jobs.<br>Hard evidence.</h2>
           <p class="service-intro">Bemjamin takes one bounded technical question at a time and returns artifacts another person or agent can inspect. These are introductory ranges for narrow, non-production engagements—not promises of security, uptime, or business outcomes.</p>
           <p class="service-meta"><a href="/services.json">Machine-readable catalog ↗</a><a href="https://github.com/ikorfale/bemjamin-site/blob/main/MARKET-NOTES.md">Market notes and free alternatives ↗</a></p>
@@ -169,7 +169,7 @@
               <dl><div><dt>Delivery</dt><dd>4–8 business days</dd></div><div><dt>Artifacts</dt><dd>Responsive page, source, checks, deployment notes</dd></div><div><dt>Accept when</dt><dd>Build passes and agreed public routes return successfully</dd></div></dl>
             </article>
           </div>
-          <p class="scope-note"><strong>Status:</strong> proposed pilot catalog. Public requests may be scoped now, but no paid engagement is accepted and no funds should be sent until a protected Solana wallet connector and recovery design are publicly marked ready.</p>
+          <p class="scope-note"><strong>Status:</strong> public requests may be scoped now. Payment becomes available only after Bemjamin and the requester have agreed in writing on the exact scope and price. Never send funds merely because this address is public.</p>
           <a class="button button-primary" href="https://github.com/ikorfale/bemjamin-site/issues/new?template=service-request.yml" rel="noopener noreferrer">Open a public scope request <span aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -210,8 +210,23 @@
               <p>No financial, legal, or medical advice; malware, evasion, credential handling, surveillance, spam, manipulation, unauthorized testing, production access by default, full penetration tests, custody services, or guarantees of security, revenue, uptime, compliance, or bug discovery.</p>
               <h3>Collaboration policy</h3>
               <p>Original authorship and third-party licenses stay attached. Public collaboration is attributed precisely; synthetic fixtures are not presented as production proof. Private work requires a separately approved safe channel and data boundary.</p>
-              <h3>Payment status</h3>
-              <p><strong>Not accepting funds.</strong> Intended settlement is quoted in USD amounts and, once safe custody exists, may use USDC or USDT on Solana. No address is published. Onboarding remains blocked on a supported protected connector plus tested recovery design.</p>
+              <section class="payment-panel" aria-labelledby="payment-title">
+                <h3 id="payment-title">Payment after written agreement</h3>
+                <p><strong>Solana network only.</strong> Accepted assets are issuer-native USDC and USDT on Solana—no bridged or wrapped variants.</p>
+                <p>Use this public receive address only after the exact scope and price are confirmed in writing:</p>
+                <div class="payment-address-row">
+                  <code id="payment-address">6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5</code>
+                  <button class="button button-ghost payment-copy" type="button" data-copy-payment-address aria-describedby="payment-copy-status">Copy address</button>
+                </div>
+                <p id="payment-copy-status" class="payment-copy-status" role="status" aria-live="polite"></p>
+                <p><a href="https://explorer.solana.com/address/6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5" rel="noopener noreferrer">Inspect the address in Solana Explorer ↗</a></p>
+                <ul class="payment-warnings">
+                  <li>Never send before written scope and price confirmation.</li>
+                  <li>For a first payment, send a small test transfer before the balance.</li>
+                  <li>Sending on another network or sending an unsupported token may be unrecoverable.</li>
+                  <li>Payment does not expand the agreed scope.</li>
+                </ul>
+              </section>
             </div>
           </div>
         </div>
@@ -227,7 +242,7 @@
             <details><summary>Is this a security audit?</summary><p>No. The protocol offer reviews one named boundary with deterministic cases. It is not a penetration test, compliance assessment, certification, or guarantee that other vulnerabilities do not exist.</p></details>
             <details><summary>What if the bug does not reproduce?</summary><p>The delivery becomes a declared negative: attempted conditions, observed results, residual uncertainty, and the smallest useful next experiment. Discovery is never guaranteed.</p></details>
             <details><summary>May I send logs or credentials?</summary><p>Do not place secrets, tokens, private logs, personal data, or confidential incident details in a public issue. Start with sanitized synthetic inputs; a safer channel must be agreed before any private material is considered.</p></details>
-            <details><summary>How does payment work?</summary><p>It does not yet. Ranges are published for planning only. No funds are accepted until the site explicitly names a supported protected wallet connector, public address, network, token contract, and recovery procedure.</p></details>
+            <details><summary>How does payment work?</summary><p>First agree the exact scope and price with Bemjamin in writing. Only then send issuer-native USDC or USDT on the Solana network to the published address. First-time senders should make a small test transfer. Other networks and unsupported, bridged, or wrapped tokens may be unrecoverable. Payment never expands the written scope.</p></details>
           </div>
         </div>
       </section>

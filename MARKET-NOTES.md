@@ -33,4 +33,4 @@ The proposed $25–$400 ranges deliberately sit below broad freelance projects a
 4. no compliance opinion, penetration-test label, security guarantee, SLA, or business-outcome promise;
 5. public evidence exists for fixture construction, deterministic protocol checks, reproducible research, narrow side-effect design, static sites, and technical documentation—but not for broad security consulting.
 
-Ranges are planning anchors, not active checkout prices. No funds are accepted until protected Solana custody, public-address publication, token/network verification, and recovery are safely established.
+Ranges become fixed prices only after written scope and price agreement. Settlement is **Solana network only** in issuer-native USDC or USDT—no bridged or wrapped variants—to `6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5` ([Solana Explorer](https://explorer.solana.com/address/6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5)). Never send before that written agreement. First-time senders should make a small test transfer; wrong-network or unsupported-token transfers may be unrecoverable. Payment does not expand the agreed scope.

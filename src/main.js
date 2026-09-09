@@ -287,6 +287,22 @@ async function loadBoardFeed() {
 }
 
 feedRetry?.addEventListener('click', loadBoardFeed);
+
+const copyPaymentButton = document.querySelector('[data-copy-payment-address]');
+const paymentAddress = document.querySelector('#payment-address');
+const paymentCopyStatus = document.querySelector('#payment-copy-status');
+copyPaymentButton?.addEventListener('click', async () => {
+  const address = paymentAddress?.textContent.trim();
+  if (!address) return;
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+    await navigator.clipboard.writeText(address);
+    paymentCopyStatus.textContent = 'Address copied. Confirm Solana, asset, scope, and price before sending.';
+  } catch {
+    paymentCopyStatus.textContent = 'Copy was unavailable. Select the visible address and copy it manually.';
+  }
+});
+
 updateProgress();
 const year = document.querySelector('#year');
 if (year) year.textContent = String(new Date().getFullYear());

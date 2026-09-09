@@ -159,6 +159,14 @@ h1 em, .closing h2 em { color: var(--acid); font-style: normal; }
 .proof-list li { display: grid; gap: .25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
 .proof-list a { width: fit-content; color: var(--ink); font: 600 1rem/1.3 var(--display); text-underline-offset: .25rem; }
 .proof-list span { color: var(--muted); font: .62rem/1.5 var(--mono); text-transform: uppercase; }
+.payment-panel { margin-top: 3rem; padding: 1.4rem; border: 1px solid rgba(202,255,56,.45); background: rgba(202,255,56,.045); }
+.payment-panel h3 { margin-top: 0 !important; }
+.payment-address-row { display: flex; align-items: stretch; gap: .75rem; margin: 1rem 0 .35rem; }
+.payment-address-row code { min-width: 0; flex: 1; display: flex; align-items: center; padding: .9rem 1rem; border: 1px solid var(--line); background: var(--night); color: var(--acid); font: .72rem/1.45 var(--mono); overflow-wrap: anywhere; user-select: all; }
+.payment-copy { flex: 0 0 auto; }
+.payment-copy-status { min-height: 1.5em; margin: .25rem 0 1rem; color: var(--cyan) !important; font: .62rem/1.5 var(--mono); }
+.payment-warnings { margin: 1rem 0 0; padding-left: 1.2rem; color: var(--muted); }
+.payment-warnings li + li { margin-top: .55rem; }
 
 .faq-list { border-top: 1px solid var(--line); }
 .faq-list details { border-bottom: 1px solid var(--line); }
@@ -276,8 +284,8 @@ footer p { margin: 0; }
   .feed-card-head { flex-direction: column; gap: .8rem; }
   .feed-card h3 { margin-top: 1rem; }
   .feed-link { min-height: 2.75rem; display: inline-flex; align-items: center; }
-  .feed-controls, .feed-pagination { align-items: stretch; flex-direction: column; }
-  .feed-controls .button { text-align: center; }
+  .feed-controls, .feed-pagination, .payment-address-row { align-items: stretch; flex-direction: column; }
+  .feed-controls .button, .payment-copy { text-align: center; }
   .principle-list li { grid-template-columns: 2.5rem 1fr; }
   footer { flex-direction: column; }
 }

@@ -6,7 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Public intake only. Do not include credentials, tokens, wallet or recovery material, personal data, confidential logs, private incident details, or production access. Payment is not active and no funds should be sent.
+        Public intake only. Do not include credentials, tokens, private keys, seed phrases, recovery material, personal data, confidential logs, private incident details, or production access.
+
+        Payment is available only after Bemjamin confirms the exact scope and price in writing. Settlement is Solana network only in issuer-native USDC or USDT—no bridged or wrapped variants. The public receive address is `6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5` ([Solana Explorer](https://explorer.solana.com/address/6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5)). Never send merely because this issue is open; first-time senders should make a small test transfer. Wrong-network or unsupported-token transfers may be unrecoverable, and payment does not expand the agreed scope.
   - type: input
     id: requester
     attributes:
@@ -68,12 +70,27 @@ body:
       description: Desired date or "none"; catalog ranges are estimates, not SLAs.
     validations:
       required: true
+  - type: dropdown
+    id: settlement_asset
+    attributes:
+      label: Settlement preference if scope is accepted
+      description: This is not a payment request; scope and price must be confirmed in writing first.
+      options:
+        - Issuer-native USDC on Solana
+        - Issuer-native USDT on Solana
+        - Not decided
+    validations:
+      required: true
   - type: checkboxes
     id: safety
     attributes:
       label: Public-data declaration
       options:
-        - label: I confirm this issue contains no secrets, credentials, private incident data, personal data, wallet material, or unauthorized targets.
+        - label: I confirm this issue contains no secrets, credentials, private keys, seed phrases, recovery material, private incident data, personal data, or unauthorized targets.
           required: true
-        - label: I understand that opening an issue does not create an engagement and that payment is currently inactive.
+        - label: I understand that opening an issue does not create an engagement and I will not send funds before written scope and price confirmation.
+          required: true
+        - label: If payment is agreed, I will use only issuer-native USDC or USDT on Solana, make a small first-time test transfer, and understand that wrong-network or unsupported-token transfers may be unrecoverable.
+          required: true
+        - label: I understand that payment does not expand the agreed scope.
           required: true

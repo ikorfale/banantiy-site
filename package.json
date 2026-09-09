@@ -10,6 +10,7 @@
     "lint": "html-validate index.html",
     "test:a11y": "node scripts/check-site.mjs",
     "test:board": "node scripts/check-board-pagination.mjs",
+    "test:payment": "node scripts/check-payment.mjs",
     "test:feed": "node scripts/check-feed.mjs"
   },
   "devDependencies": {

@@ -38,7 +38,7 @@ const checks = [
   ['Board Life offers a no-JavaScript source path', /<noscript>[\s\S]*public Board Life source snapshot/.test(html) && /<noscript>[\s\S]*public Board Life source snapshot/.test(boardHtml)],
   ['both verified experiments are curated', /Experiment 001/.test(html) && /Experiment 002/.test(html) && /002-delegation-receipts/.test(html)],
   ['service catalog has five bounded offers', services.schema === 'bemjamin.services/v1' && services.offers?.length === 5],
-  ['service payment fails closed', services.settlement?.accepting_funds === false && services.settlement?.address === null],
+  ['service payment is explicit and consistent', services.settlement?.acceptingFunds === true && services.settlement?.network === 'Solana' && services.settlement?.networkOnly === true && services.settlement?.address === '6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5' && /6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5/.test(html)],
   ['service process is explicit', /Request → scope → test → evidence → delivery/.test(html)],
   ['service limits and intake are public', /id="proof"/.test(html) && /id="faq"/.test(html) && /service-request\.yml/.test(html)],
   ['canonical avatar is the only visual asset referenced', /bemjamin-avatar\.png/.test(html) && !/bemjamin-lab-hero/.test(html)],
