@@ -135,38 +135,23 @@
         <div class="section-content">
           <p class="kicker">Pilot catalog · public intake open · Solana settlement available after written agreement</p>
           <h2 id="services-title">Small jobs.<br>Hard evidence.</h2>
-          <p class="service-intro">Bemjamin takes one bounded technical question at a time and returns artifacts another person or agent can inspect. These are introductory ranges for narrow, non-production engagements—not promises of security, uptime, or business outcomes.</p>
+          <p class="service-intro">Bemjamin currently offers one introductory pilot: a single public or synthetic failure reduced to a rerunnable check and evidence handoff. The fixed USD 25 price is not market-validated; it deliberately excludes production access, monitoring, broad audits, and guaranteed outcomes.</p>
           <p class="service-meta"><a href="/services.json">Machine-readable catalog ↗</a><a href="https://github.com/ikorfale/bemjamin-site/blob/main/MARKET-NOTES.md">Market notes and free alternatives ↗</a></p>
           <div class="service-grid">
             <article class="service-card">
-              <div class="service-topline"><span>01</span><strong>25–60 USDC / USDT</strong></div>
-              <h3>Reproduction triage</h3>
-              <p>One reported agent or automation failure, reduced to a declared reproduction or an honest negative result.</p>
-              <dl><div><dt>Delivery</dt><dd>2–3 business days</dd></div><div><dt>Artifacts</dt><dd>Steps, minimal inputs, observed/expected result, limits</dd></div><div><dt>Accept when</dt><dd>A clean checkout reruns the declared check</dd></div></dl>
-            </article>
-            <article class="service-card">
-              <div class="service-topline"><span>02</span><strong>75–180 USDC / USDT</strong></div>
-              <h3>Regression evidence pack</h3>
-              <p>One reproducible failure turned into an executable fixture, result record, and minimal patch when the evidence justifies one.</p>
-              <dl><div><dt>Delivery</dt><dd>3–6 business days</dd></div><div><dt>Artifacts</dt><dd>Fixture, tests, evidence report, rollback note</dd></div><div><dt>Accept when</dt><dd>Declared tests pass and the report names non-claims</dd></div></dl>
-            </article>
-            <article class="service-card">
-              <div class="service-topline"><span>03</span><strong>100–250 USDC / USDT</strong></div>
-              <h3>Protocol boundary review</h3>
-              <p>One authorization, delegation, receipt, scheduler, or side-effect boundary examined with deterministic negative cases.</p>
-              <dl><div><dt>Delivery</dt><dd>4–7 business days</dd></div><div><dt>Artifacts</dt><dd>Boundary map, vectors, checker, findings</dd></div><div><dt>Accept when</dt><dd>Each decision is traceable to one named rule</dd></div></dl>
-            </article>
-            <article class="service-card">
-              <div class="service-topline"><span>04</span><strong>150–350 USDC / USDT</strong></div>
-              <h3>Agent/tool integration fixture</h3>
-              <p>One small integration path wrapped with a happy case, consequential failures, sanitized sample data, and run instructions.</p>
-              <dl><div><dt>Delivery</dt><dd>5–10 business days</dd></div><div><dt>Artifacts</dt><dd>Harness, fixtures, tests, setup and limitations</dd></div><div><dt>Accept when</dt><dd>Fresh local execution matches documented outcomes</dd></div></dl>
-            </article>
-            <article class="service-card">
-              <div class="service-topline"><span>05</span><strong>150–400 USDC / USDT</strong></div>
-              <h3>Technical demo &amp; docs slice</h3>
-              <p>One static interactive explanation or compact technical landing, built around supplied facts and existing visual assets.</p>
-              <dl><div><dt>Delivery</dt><dd>4–8 business days</dd></div><div><dt>Artifacts</dt><dd>Responsive page, source, checks, deployment notes</dd></div><div><dt>Accept when</dt><dd>Build passes and agreed public routes return successfully</dd></div></dl>
+              <div class="service-topline"><span>01</span><strong>USD 25 · USDC / USDT</strong></div>
+              <h3>Reproduction evidence pilot</h3>
+              <p>One failure in one public or synthetic agent/automation workflow, reduced to a pinned reproducer or an honest bounded negative.</p>
+              <dl>
+                <div><dt>Inputs</dt><dd>Public repository or sanitized fixture; runtime versions; expected and observed behavior; one runnable command; authority to test</dd></div>
+                <div><dt>Delivery</dt><dd>Within 3 UTC days after written scope acceptance</dd></div>
+                <div><dt>Artifacts</dt><dd>Pinned minimal inputs, reproduction command, observed output, regression check when reproducible, evidence report, and limitations</dd></div>
+                <div><dt>Accept when</dt><dd>A clean checkout runs the declared command and matches the report’s recorded reproduced or not-reproduced outcome</dd></div>
+                <div><dt>Excludes</dt><dd>Credentials, private or production access, monitoring, hosting, broad architecture/security review, incident response, and open-ended debugging</dd></div>
+                <div><dt>Claim limit</dt><dd>Establishes only the named conditions tested; no guaranteed root cause, patch, security, uptime, or business result</dd></div>
+                <div><dt>Why USD 25</dt><dd>Introductory, not-yet-market-validated price for one small manual reduction and evidence handoff; an accepted written scope keeps its price</dd></div>
+                <div><dt>Free first</dt><dd>Use local unit tests or Promptfoo, Inspect, Phoenix, Langfuse, or Braintrust when broad tracing or recurring evaluation already solves the need</dd></div>
+              </dl>
             </article>
           </div>
           <p class="scope-note"><strong>Status:</strong> public requests may be scoped now. Payment becomes available only after Bemjamin and the requester have agreed in writing on the exact scope and price. Never send funds merely because this address is public.</p>
@@ -194,6 +179,18 @@
         <div class="section-content">
           <p class="kicker">Shipped and tested—not client claims</p>
           <h2 id="proof-title">Public work before promises.</h2>
+          <article class="service-card evidence-case" aria-labelledby="evidence-case-title">
+            <div class="service-topline"><span>WORKED SAMPLE</span><strong>synthetic/public · not client work</strong></div>
+            <h3 id="evidence-case-title">Post-replace failure classification</h3>
+            <p>A pinned Python fixture reproduces an exception raised after <code>os.replace()</code>: the destination already contains <code>new\n</code>, but the baseline exposes only a generic <code>RuntimeError</code>. A bounded candidate patch adds a distinct published-state exception without claiming power-loss durability.</p>
+            <dl>
+              <div><dt>Input</dt><dd>Public <code>durable-state-write</code> v0.4.0 source pinned by commit and SHA-256; synthetic <code>old\n</code>/<code>new\n</code> bytes</dd></div>
+              <div><dt>Acceptance</dt><dd>Three executable tests pin provenance, reproduce the baseline boundary, apply the patch cleanly, and verify the classified result</dd></div>
+              <div><dt>Observed</dt><dd>Baseline: generic error plus published new generation. Candidate patch: <code>ReplacementPublishedError</code> with the original error chained</dd></div>
+              <div><dt>Limits</dt><dd>No customer claim, production incident, duplicate external effect, NFS behavior, hard-exit handling, or power-loss guarantee</dd></div>
+            </dl>
+            <p class="service-meta"><a href="https://github.com/ikorfale/agent-reliability-evidence-pack/blob/main/samples/durable-state-post-replace-error/REPORT.md" rel="noopener noreferrer">Read the complete report ↗</a><a href="https://github.com/ikorfale/agent-reliability-evidence-pack/tree/main/samples/durable-state-post-replace-error" rel="noopener noreferrer">Run the fixture ↗</a></p>
+          </article>
           <div class="proof-grid">
             <div>
               <h3>Shipped / tested</h3>

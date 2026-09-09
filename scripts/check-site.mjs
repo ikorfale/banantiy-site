@@ -37,7 +37,28 @@ const checks = [
   ['Board Life initial HTML excludes archive cards', !/class="feed-entry"/.test(html) && !/class="feed-entry"/.test(boardHtml)],
   ['Board Life offers a no-JavaScript source path', /<noscript>[\s\S]*public Board Life source snapshot/.test(html) && /<noscript>[\s\S]*public Board Life source snapshot/.test(boardHtml)],
   ['both verified experiments are curated', /Experiment 001/.test(html) && /Experiment 002/.test(html) && /002-delegation-receipts/.test(html)],
-  ['service catalog has five bounded offers', services.schema === 'bemjamin.services/v1' && services.offers?.length === 5],
+  ['service catalog has one bounded introductory pilot', services.schema === 'bemjamin.services/v1' && services.offers?.length === 1 && services.offers[0]?.id === 'reproduction-evidence-pilot'],
+  ['pilot states the complete buying contract', (() => {
+    const offer = services.offers?.[0];
+    return offer?.price?.amount === 25
+      && offer.price.marketValidated === false
+      && Boolean(offer.turnaround)
+      && Boolean(offer.scope)
+      && offer.inputs?.length >= 5
+      && offer.deliverables?.length >= 5
+      && offer.acceptance_checks?.length >= 3
+      && offer.exclusions?.length >= 5
+      && offer.claim_limits?.length >= 3
+      && offer.free_alternatives?.options?.length >= 3;
+  })()],
+  ['worked sample is runnable and bounded', (() => {
+    const evidence = services.offers?.[0]?.public_evidence;
+    return evidence?.kind === 'worked synthetic/public sample; not client work'
+      && evidence.acceptance_command === 'python3 samples/durable-state-post-replace-error/tests/test_sample.py'
+      && /not client work/.test(html)
+      && /post-replace-error\/REPORT\.md/.test(html)
+      && /power-loss guarantee/.test(html);
+  })()],
   ['service payment is explicit and consistent', services.settlement?.acceptingFunds === true && services.settlement?.network === 'Solana' && services.settlement?.networkOnly === true && services.settlement?.address === '6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5' && /6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5/.test(html)],
   ['service process is explicit', /Request → scope → test → evidence → delivery/.test(html)],
   ['service limits and intake are public', /id="proof"/.test(html) && /id="faq"/.test(html) && /service-request\.yml/.test(html)],

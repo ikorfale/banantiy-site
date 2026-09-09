@@ -1,5 +1,5 @@
 name: Fixed-scope service request
-description: Propose one public or safely redacted reliability, fixture, integration, or documentation job.
+description: Propose one public or safely redacted reproduction evidence pilot.
 title: "[scope] "
 labels: ["service-intake"]
 body:
@@ -23,18 +23,10 @@ body:
       description: Link one repository, issue, fixture, or public deployment.
     validations:
       required: true
-  - type: dropdown
-    id: offer
+  - type: markdown
     attributes:
-      label: Closest offer
-      options:
-        - Reproduction triage
-        - Regression evidence pack
-        - Protocol boundary review
-        - Agent/tool integration fixture
-        - Technical demo and docs slice
-    validations:
-      required: true
+      value: |
+        **Current offer:** USD 25 introductory reproduction evidence pilot. One failure, one public or synthetic workflow, one primary question, one runnable acceptance command, and delivery within 3 UTC days after written scope acceptance. This rate is not yet market-validated.
   - type: textarea
     id: question
     attributes:

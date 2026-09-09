@@ -27,105 +27,68 @@
   },
   "offers": [
     {
-      "id": "reproduction-triage",
+      "id": "reproduction-evidence-pilot",
       "status": "proposed",
-      "price_usd_range": [
-        25,
-        60
+      "price": {
+        "amount": 25,
+        "unit": "USD",
+        "fixedAfterWrittenAcceptance": true,
+        "rationale": "Introductory pilot price for one small manual reduction and evidence handoff; it is not a market-validated rate.",
+        "marketValidated": false
+      },
+      "turnaround": "Within 3 UTC days after written scope acceptance.",
+      "scope": "One failure in one public or synthetic agent or automation workflow, with one primary question and one runnable acceptance command.",
+      "inputs": [
+        "public repository or safely sanitized fixture",
+        "runtime and dependency versions",
+        "expected and observed behavior",
+        "one runnable command",
+        "requester authority to test the named artifact"
       ],
-      "turnaround_business_days": [
-        2,
-        3
-      ],
-      "scope": "One reported agent or automation failure.",
       "deliverables": [
-        "reproduction steps",
-        "minimal inputs",
-        "observed and expected result",
-        "limitations"
-      ],
-      "acceptance": "A clean checkout reruns the declared check."
-    },
-    {
-      "id": "regression-evidence-pack",
-      "status": "proposed",
-      "price_usd_range": [
-        75,
-        180
-      ],
-      "turnaround_business_days": [
-        3,
-        6
-      ],
-      "scope": "One reproducible failure in one bounded workflow.",
-      "deliverables": [
-        "executable fixture",
-        "tests",
+        "pinned minimal inputs",
+        "reproduction command",
+        "recorded observed output",
+        "regression check when the failure reproduces",
         "evidence report",
-        "rollback note",
-        "minimal patch when justified"
+        "limitations and rollback note for any justified patch"
       ],
-      "acceptance": "Declared tests pass and the report names limitations and non-claims."
-    },
-    {
-      "id": "protocol-boundary-review",
-      "status": "proposed",
-      "price_usd_range": [
-        100,
-        250
+      "acceptance_checks": [
+        "a clean checkout runs the declared command",
+        "the result matches the report's recorded reproduced or not-reproduced outcome",
+        "the report names tested conditions, residual uncertainty, and non-claims"
       ],
-      "turnaround_business_days": [
-        4,
-        7
+      "exclusions": [
+        "credentials, secrets, or private incident data",
+        "private or production access",
+        "monitoring, hosting, or incident response",
+        "broad architecture, security, penetration, or compliance review",
+        "open-ended debugging or support"
       ],
-      "scope": "One named authorization, delegation, receipt, scheduler, or side-effect boundary.",
-      "deliverables": [
-        "boundary map",
-        "negative vectors",
-        "reference checker",
-        "findings"
+      "claim_limits": [
+        "establishes only the named conditions tested",
+        "does not guarantee root cause, a patch, bug discovery, security, uptime, or business outcomes",
+        "a non-reproduction is delivered as a bounded negative, not reframed as success"
       ],
-      "acceptance": "Every verdict is traceable to one named rule."
-    },
-    {
-      "id": "agent-tool-integration-fixture",
-      "status": "proposed",
-      "price_usd_range": [
-        150,
-        350
-      ],
-      "turnaround_business_days": [
-        5,
-        10
-      ],
-      "scope": "One small authorized agent/tool integration path.",
-      "deliverables": [
-        "harness",
-        "sanitized fixtures",
-        "happy and consequential failure tests",
-        "setup and limitations"
-      ],
-      "acceptance": "Fresh local execution matches the documented outcomes."
-    },
-    {
-      "id": "technical-demo-docs-slice",
-      "status": "proposed",
-      "price_usd_range": [
-        150,
-        400
-      ],
-      "turnaround_business_days": [
-        4,
-        8
-      ],
-      "scope": "One static interactive explanation or compact technical landing using supplied facts and existing assets.",
-      "deliverables": [
-        "responsive page",
-        "source",
-        "checks",
-        "deployment notes"
-      ],
-      "acceptance": "The build passes and agreed public routes return successfully."
+      "public_evidence": {
+        "kind": "worked synthetic/public sample; not client work",
+        "report_url": "https://github.com/ikorfale/agent-reliability-evidence-pack/blob/main/samples/durable-state-post-replace-error/REPORT.md",
+        "fixture_url": "https://github.com/ikorfale/agent-reliability-evidence-pack/tree/main/samples/durable-state-post-replace-error",
+        "acceptance_command": "python3 samples/durable-state-post-replace-error/tests/test_sample.py",
+        "recorded_result": "Three tests pin provenance, reproduce the post-replace classification boundary, and verify the bounded candidate patch.",
+        "claim_limit": "No customer claim, production incident, duplicate external effect, NFS behavior, hard-exit handling, or power-loss guarantee."
+      },
+      "free_alternatives": {
+        "useFirstWhen": "Use local unit tests or an existing tracing/evaluation tool when the need is broad observability, dashboards, datasets, repeated evaluations, or production monitoring.",
+        "options": [
+          "local unit tests or JSONL fixtures",
+          "Promptfoo",
+          "Inspect",
+          "Phoenix",
+          "Langfuse",
+          "Braintrust"
+        ]
+      }
     }
   ],
   "excluded": [

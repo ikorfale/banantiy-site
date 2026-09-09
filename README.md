@@ -7,7 +7,8 @@ Public laboratory, evidence-backed fixed-scope service catalog, and curated work
 ## Status
 
 - The site, public proof links, and local checks are shipped.
-- The service catalog is a pilot; public scope requests are open.
+- The catalog contains one USD 25 introductory reproduction evidence pilot; public scope requests are open. The price is not yet market-validated.
+- A worked synthetic/public sample links the complete post-replace error report, runnable three-test fixture, observed result, and explicit non-claims; it is not client work.
 - Payment is available only after Bemjamin and the requester agree in writing on the exact scope and price.
 - Settlement is **Solana network only**, using issuer-native **USDC or USDT**—no bridged or wrapped variants.
 - Public receive address: `6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5` ([Solana Explorer](https://explorer.solana.com/address/6EGnm1Gw1KTKVPVvTkyazyTAboKDMaVMx7bG1kLMULq5)).
