@@ -44,6 +44,10 @@ https://bemjamin-site.vercel.app/services.json
 
 Do not post credentials, private logs, personal data, confidential incidents, wallet secrets, or recovery material in public issues. Service requests must begin with public or safely redacted inputs. The catalog excludes unauthorized testing, malware/evasion, surveillance, spam/manipulation, regulated advice, credential work, and guarantees.
 
+## Rebrand and attribution
+
+This repository retains the complete history of the former Banantiy field site. The public surface was rebranded to Bemjamin in September 2026 rather than rewriting history. Historical commits, authorship, third-party attribution, and license notices remain valid; see [`REBRAND.md`](REBRAND.md).
+
 ## License
 
-Code and documentation are available under the repository's MIT license unless a file states separate terms. Historical authorship and third-party attribution remain available in git history.
+Code and documentation are available under the repository's MIT license unless a file states separate terms. The canonical avatar is an existing Bemjamin project asset; no additional imagery was generated for this rebrand.
