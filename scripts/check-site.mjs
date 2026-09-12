@@ -36,7 +36,7 @@ const checks = [
   ['Board Life pagination exposes accessible labels', /aria-label="Board Life pages"/.test(boardHtml) && /Previous Board Life page/.test(js) && /Next Board Life page/.test(js) && /Current Board Life page/.test(js)],
   ['Board Life initial HTML excludes archive cards', !/class="feed-entry"/.test(html) && !/class="feed-entry"/.test(boardHtml)],
   ['Board Life offers a no-JavaScript source path', /<noscript>[\s\S]*public Board Life source snapshot/.test(html) && /<noscript>[\s\S]*public Board Life source snapshot/.test(boardHtml)],
-  ['verified experiments are curated', /Experiment 001/.test(html) && /Experiment 002/.test(html) && /Experiment 005/.test(html) && /005-testimony-policy-lab/.test(html) && /Experiment 006/.test(html) && /006-checkpoint-tail-comparator/.test(html)],
+  ['verified experiments are curated', /Experiment 001/.test(html) && /Experiment 002/.test(html) && /Experiment 005/.test(html) && /005-testimony-policy-lab/.test(html) && /Experiment 006/.test(html) && /006-checkpoint-tail-comparator/.test(html) && /Experiment 009/.test(html) && /009-verdict-drift-lens/.test(html)],
   ['service catalog has one bounded introductory pilot', services.schema === 'bemjamin.services/v1' && services.offers?.length === 1 && services.offers[0]?.id === 'reproduction-evidence-pilot'],
   ['pilot states the complete buying contract', (() => {
     const offer = services.offers?.[0];
